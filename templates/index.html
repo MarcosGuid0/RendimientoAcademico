@@ -1,0 +1,42 @@
+<!-- templates/index.html -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Predicción de Puntaje de Examen</title>
+</head>
+<body>
+    <h2>Formulario de Hábitos del Estudiante</h2>
+    <form method="post">
+        <label>Edad: <input type="number" name="age" required></label><br><br>
+        <label>Horas de estudio por día: <input type="number" step="0.1" name="study_hours_per_day" required></label><br><br>
+        <label>Horas en redes sociales: <input type="number" step="0.1" name="social_media_hours" required></label><br><br>
+        <label>Horas viendo Netflix: <input type="number" step="0.1" name="netflix_hours" required></label><br><br>
+        <label>Porcentaje de asistencia: <input type="number" step="0.1" name="attendance_percentage" required></label><br><br>
+        <label>Horas de sueño: <input type="number" step="0.1" name="sleep_hours" required></label><br><br>
+        <label>Frecuencia de ejercicio (por semana): <input type="number" name="exercise_frequency" required></label><br><br>
+        <label>Calificación de salud mental (1-10): <input type="number" name="mental_health_rating" required></label><br><br>
+
+        {% for campo, opciones in categorias.items() %}
+            <label>{{ campo.replace("_", " ").capitalize() }}:
+                <select name="{{ campo }}" required>
+                    {% for opcion in opciones %}
+                        <option value="{{ opcion }}">{{ opcion }}</option>
+                    {% endfor %}
+                </select>
+            </label><br><br>
+        {% endfor %}
+
+        <button type="submit">Predecir Puntaje</button>
+    </form>
+
+    {% if prediction is defined %}
+        <h3>Predicción del Puntaje de Examen: {{ prediction | round(2) }}</h3>
+    {% endif %}
+    {% if explicacion %}
+    <h3>Recomendación:</h3>
+    <p>{{ explicacion }}</p>
+{% endif %}
+</body>
+</html>
