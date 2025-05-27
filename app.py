@@ -23,7 +23,7 @@ def generar_explicacion(data_dict, prediccion):
     )
 
     response = client.chat.completions.create(
-        model="gpt-4",  # o gpt-3.5-turbo
+        model="gpt-3.5-turbo",  
         messages=[{"role": "user", "content": prompt}],
         max_tokens=150,
         temperature=0.7
